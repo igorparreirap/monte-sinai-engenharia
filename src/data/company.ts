@@ -18,9 +18,13 @@ export interface WhatsAppContact {
   href: string;
 }
 
-/** Contatos de WhatsApp. O primeiro é o principal (botão flutuante e redes sociais). */
+/**
+ * Contatos de WhatsApp. O primeiro ("Contato") é o número oficial da empresa,
+ * usado também no botão flutuante e nas redes sociais.
+ */
 export const whatsappContacts: readonly WhatsAppContact[] = [
-  { name: "Fabiano", display: "(62) 9 9637-3177", href: whatsappLink("5562996373177") },
+  { name: "Contato", display: "(62) 9 9637-3177", href: whatsappLink("5562996373177") },
+  { name: "Fabiano", display: "(62) 9 8429-3564", href: whatsappLink("5562984293564") },
   { name: "Joel", display: "(62) 9 9698-0943", href: whatsappLink("5562996980943") },
   { name: "Alberto", display: "(62) 9 8247-2147", href: whatsappLink("5562982472147") },
 ];

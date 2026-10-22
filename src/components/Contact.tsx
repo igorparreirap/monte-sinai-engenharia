@@ -61,23 +61,18 @@ export function Contact() {
               </InfoItem>
               <InfoItem icon={<WhatsAppIcon className="h-5 w-5" />} title="WhatsApp">
                 <ul className="space-y-1">
-                  {whatsappContacts.map((contact, index) => (
+                  {whatsappContacts.map((contact) => (
                     <li key={contact.href}>
                       <a
                         href={contact.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Conversar com ${contact.name} pelo WhatsApp: ${contact.display} (abre em nova aba)`}
+                        aria-label={`WhatsApp ${contact.name}: ${contact.display} (abre em nova aba)`}
                         className={linkClass}
                       >
                         <span className="font-semibold text-white">{contact.name}</span>{" "}
                         {contact.display}
                       </a>
-                      {index === 0 && (
-                        <span className="ml-2 rounded bg-brand-orange/20 px-1.5 py-0.5 text-xs font-semibold text-brand-orange">
-                          principal
-                        </span>
-                      )}
                     </li>
                   ))}
                 </ul>

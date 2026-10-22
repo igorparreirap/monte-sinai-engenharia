@@ -18,17 +18,17 @@ describe("App", () => {
     expect(within(section).getAllByRole("listitem")).toHaveLength(services.length);
   });
 
-  it("lista os WhatsApp da equipe com o Fabiano como contato principal", () => {
+  it("lista o WhatsApp de contato da empresa e os da equipe", () => {
     render(<App />);
     const section = document.getElementById("contato") as HTMLElement;
     for (const contact of whatsappContacts) {
       expect(
-        within(section).getByRole("link", { name: new RegExp(`Conversar com ${contact.name}`) }),
+        within(section).getByRole("link", { name: new RegExp(`WhatsApp ${contact.name}:`) }),
       ).toHaveAttribute("href", contact.href);
     }
-    expect(within(section).getByText("principal")).toBeInTheDocument();
+    expect(whatsappContacts[0].name).toBe("Contato");
     expect(
-      screen.getByRole("link", { name: /Conversar com Fabiano pelo WhatsApp \(abre/ }),
+      screen.getByRole("link", { name: /Conversar com a Monte Sinai pelo WhatsApp/ }),
     ).toHaveAttribute("href", whatsappContacts[0].href);
   });
 
