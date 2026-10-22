@@ -69,17 +69,34 @@ npm run dev:php      # servidor PHP em http://localhost:8000; o Vite redireciona
 
 ## Publicação (HostGator)
 
-1. `npm run build` e `composer install --no-dev --optimize-autoloader`.
-2. Envie o **conteúdo de `dist/`** para `public_html/`.
-3. Envie `vendor/` e `private/` para a pasta **acima** de `public_html/` (fora do acesso público).
-4. No servidor, crie `private/smtp-config.php` a partir do modelo com a senha da caixa de e-mail.
+O deploy é automático: quando o workflow **CI** passa na `main`, o workflow **Deploy** gera o build e envia por FTPS:
+
+| Local     | Servidor                      |
+| --------- | ----------------------------- |
+| `dist/`   | `public_html/` (raiz pública) |
+| `vendor/` | `vendor/` (fora da raiz)      |
 
 ```
-/home/usuario/
-├─ public_html/   ← conteúdo de dist/
-├─ vendor/
-└─ private/smtp-config.php
+/home1/monte968/
+├─ public_html/              ← build do site
+├─ vendor/                   ← PHPMailer
+└─ private/smtp-config.php   ← criado manualmente no servidor, nunca versionado
 ```
+
+Configuração no GitHub (Settings → Secrets and variables → Actions):
+
+| Tipo     | Nome           | Valor                          |
+| -------- | -------------- | ------------------------------ |
+| Variable | `FTP_SERVER`   | `br184.hostgator.com.br`       |
+| Variable | `SITE_URL`     | `https://montesinaieng.com.br` |
+| Secret   | `FTP_USERNAME` | conta FTP dedicada ao deploy   |
+| Secret   | `FTP_PASSWORD` | senha dessa conta              |
+
+O deploy também pode ser disparado manualmente em **Actions → Deploy → Run workflow**.
+
+### Formulário de contato
+
+O endpoint lê `private/smtp-config.php` no servidor. Só a senha é obrigatória; host, porta, remetente e destinatário podem ser sobrescritos (veja `private/smtp-config.example.php`).
 
 ## Fluxo de trabalho
 
