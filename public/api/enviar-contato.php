@@ -8,15 +8,18 @@ header('X-Content-Type-Options: nosniff');
 
 const RATE_LIMIT_SECONDS = 60;
 
-// Valores padrão; qualquer um pode ser sobrescrito em private/smtp-config.php.
+// Valores padrão (SMTP da Locaweb, onde fica o e-mail da empresa).
+// Qualquer um pode ser sobrescrito em private/smtp-config.php.
+// A Locaweb exige que o remetente ('from') seja a mesma conta autenticada ('username').
 const SMTP_DEFAULTS = [
-    'host' => 'br184.hostgator.com.br',
+    'host' => 'email-ssl.com.br',
     'port' => 465,
-    'username' => 'montesinai@montesinaieng.com.br',
+    'username' => 'contato@montesinaieng.com.br',
     'password' => '',
-    'from' => 'montesinai@montesinaieng.com.br',
+    'from' => '',
     'from_name' => 'Monte Sinai Engenharia - Site',
-    'to' => 'montesinai@montesinaieng.com.br',
+    // Um endereço ou uma lista de endereços que recebem as mensagens.
+    'to' => 'contato@montesinaieng.com.br',
 ];
 
 function respond(int $status, string $message): never
@@ -87,8 +90,10 @@ try {
     $mail->SMTPSecure = $mail->Port === 465 ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
     $mail->CharSet = 'UTF-8';
 
-    $mail->setFrom((string) $smtp['from'], (string) $smtp['from_name']);
-    $mail->addAddress((string) $smtp['to']);
+    $mail->setFrom((string) ($smtp['from'] ?: $smtp['username']), (string) $smtp['from_name']);
+    foreach ((array) $smtp['to'] as $recipient) {
+        $mail->addAddress((string) $recipient);
+    }
     $mail->addReplyTo($email, $name);
     $mail->Subject = 'Contato pelo site: ' . $subjects[$subject];
     $mail->Body = "Nome: {$name}\nE-mail: {$email}\nTelefone: {$phone}\nAssunto: {$subjects[$subject]}\n\nMensagem:\n{$message}";
