@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
-import { company } from "@/data/company";
+import { Clock, Mail, MapPin } from "lucide-react";
+import { company, whatsappContacts } from "@/data/company";
 import { ContactForm } from "./ContactForm";
 import { SectionHeading } from "./SectionHeading";
 import { SocialLinks } from "./SocialLinks";
@@ -59,20 +59,23 @@ export function Contact() {
                   {address.city} – {address.state}, {address.zip}
                 </address>
               </InfoItem>
-              <InfoItem icon={<Phone className="h-5 w-5" aria-hidden="true" />} title="Telefone">
-                <a href={company.phone.href} className={linkClass}>
-                  {company.phone.display}
-                </a>
-              </InfoItem>
               <InfoItem icon={<WhatsAppIcon className="h-5 w-5" />} title="WhatsApp">
-                <a
-                  href={company.whatsapp.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={linkClass}
-                >
-                  {company.whatsapp.display}
-                </a>
+                <ul className="space-y-1">
+                  {whatsappContacts.map((contact) => (
+                    <li key={contact.href}>
+                      <a
+                        href={contact.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`WhatsApp ${contact.name}: ${contact.display} (abre em nova aba)`}
+                        className={linkClass}
+                      >
+                        <span className="font-semibold text-white">{contact.name}</span>{" "}
+                        {contact.display}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </InfoItem>
               <InfoItem icon={<Mail className="h-5 w-5" aria-hidden="true" />} title="E-mail">
                 <a href={`mailto:${company.email}`} className={linkClass}>

@@ -5,6 +5,30 @@
 
 const FOUNDING_YEAR = 2013;
 
+const WHATSAPP_GREETING = "Olá! Vim pelo site da Monte Sinai e gostaria de mais informações.";
+
+/** Monta o link do WhatsApp a partir do número com DDI e DDD (somente dígitos). */
+function whatsappLink(number: string) {
+  return `https://wa.me/${number}?text=${encodeURIComponent(WHATSAPP_GREETING)}`;
+}
+
+export interface WhatsAppContact {
+  name: string;
+  display: string;
+  href: string;
+}
+
+/**
+ * Contatos de WhatsApp. O primeiro ("Contato") é o número oficial da empresa,
+ * usado também no botão flutuante e nas redes sociais.
+ */
+export const whatsappContacts: readonly WhatsAppContact[] = [
+  { name: "Contato", display: "(62) 9 9637-3177", href: whatsappLink("5562996373177") },
+  { name: "Fabiano", display: "(62) 9 8429-3564", href: whatsappLink("5562984293564") },
+  { name: "Joel", display: "(62) 9 9698-0943", href: whatsappLink("5562996980943") },
+  { name: "Alberto", display: "(62) 9 8247-2147", href: whatsappLink("5562982472147") },
+];
+
 export const company = {
   name: "Monte Sinai Engenharia e Construções",
   legalName: "Monte Sinai Engenharia e Construções LTDA",
@@ -14,14 +38,7 @@ export const company = {
   yearsOfExperience: new Date().getFullYear() - FOUNDING_YEAR,
   tagline: "Soluções completas em engenharia elétrica com qualidade e compromisso.",
   email: "contato@montesinaieng.com.br",
-  phone: {
-    display: "(62) 9 9698-0943",
-    href: "tel:+5562996980943",
-  },
-  whatsapp: {
-    display: "(62) 9 8429-3564",
-    href: "https://wa.me/5562984293564",
-  },
+  whatsapp: whatsappContacts[0],
   address: {
     street: "Praça da Matriz, Qd. 11, Lt. 20",
     city: "Itaberaí",
