@@ -1,0 +1,29 @@
+# Dependências
+node_modules/
+vendor/
+
+# Build
+dist/
+*.tsbuildinfo
+
+# Segredos e configurações locais
+.env
+.env.*
+!.env.example
+private/smtp-config.php
+
+# Logs
+*.log
+npm-debug.log*
+
+# Pacotes de upload manual
+*.zip
+
+# Editor e sistema operacional
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
