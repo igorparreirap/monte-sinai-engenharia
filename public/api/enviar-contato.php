@@ -6,9 +6,18 @@ use PHPMailer\PHPMailer\PHPMailer;
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
-const SMTP_HOST = 'br184.hostgator.com.br';
-const SMTP_USER = 'montesinai@montesinaieng.com.br';
 const RATE_LIMIT_SECONDS = 60;
+
+// Valores padrão; qualquer um pode ser sobrescrito em private/smtp-config.php.
+const SMTP_DEFAULTS = [
+    'host' => 'br184.hostgator.com.br',
+    'port' => 465,
+    'username' => 'montesinai@montesinaieng.com.br',
+    'password' => '',
+    'from' => 'montesinai@montesinaieng.com.br',
+    'from_name' => 'Monte Sinai Engenharia - Site',
+    'to' => 'montesinai@montesinaieng.com.br',
+];
 
 function respond(int $status, string $message): never
 {
@@ -64,22 +73,22 @@ if (!is_file($configPath) || !is_file($autoloadPath)) {
     respond(500, 'O formulário ainda não está configurado. Entre em contato por telefone ou tente mais tarde.');
 }
 
-$smtp = require $configPath;
+$smtp = array_merge(SMTP_DEFAULTS, (array) require $configPath);
 require $autoloadPath;
 
 try {
     $mail = new PHPMailer(true);
     $mail->isSMTP();
-    $mail->Host = SMTP_HOST;
+    $mail->Host = (string) $smtp['host'];
     $mail->SMTPAuth = true;
-    $mail->Username = SMTP_USER;
-    $mail->Password = (string) ($smtp['password'] ?? '');
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port = 465;
+    $mail->Username = (string) $smtp['username'];
+    $mail->Password = (string) $smtp['password'];
+    $mail->Port = (int) $smtp['port'];
+    $mail->SMTPSecure = $mail->Port === 465 ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
     $mail->CharSet = 'UTF-8';
 
-    $mail->setFrom(SMTP_USER, 'Monte Sinai Engenharia - Site');
-    $mail->addAddress(SMTP_USER);
+    $mail->setFrom((string) $smtp['from'], (string) $smtp['from_name']);
+    $mail->addAddress((string) $smtp['to']);
     $mail->addReplyTo($email, $name);
     $mail->Subject = 'Contato pelo site: ' . $subjects[$subject];
     $mail->Body = "Nome: {$name}\nE-mail: {$email}\nTelefone: {$phone}\nAssunto: {$subjects[$subject]}\n\nMensagem:\n{$message}";
