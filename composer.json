@@ -1,0 +1,13 @@
+{
+  "name": "monte-sinai/site-institucional",
+  "description": "Endpoint de contato do site da Monte Sinai Engenharia e Construções",
+  "type": "project",
+  "license": "proprietary",
+  "require": {
+    "phpmailer/phpmailer": "^6.9"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}

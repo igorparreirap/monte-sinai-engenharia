@@ -1,4 +1,5 @@
 import { About } from "@/components/About";
+import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { LocationMap } from "@/components/LocationMap";
@@ -20,6 +21,7 @@ export default function App() {
         <Hero />
         <About />
         <Services />
+        <Contact />
         <LocationMap />
       </main>
       <Footer />
