@@ -96,7 +96,7 @@ O deploy também pode ser disparado manualmente em **Actions → Deploy → Run 
 
 ### Formulário de contato
 
-O endpoint lê `private/smtp-config.php` no servidor. Só a senha é obrigatória; host, porta, remetente e destinatário podem ser sobrescritos (veja `private/smtp-config.example.php`).
+O endpoint envia pelo SMTP da Locaweb, onde fica o e-mail da empresa, e lê as credenciais de `private/smtp-config.php` no servidor. Nesse arquivo ficam a conta de envio (`username`/`password`) e a lista de destinatários (`to`), mantendo endereços e senhas fora do repositório. Veja o modelo em `private/smtp-config.example.php`.
 
 ## Fluxo de trabalho
 
