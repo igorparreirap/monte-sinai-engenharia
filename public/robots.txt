@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://montesinaieng.com.br/sitemap.xml
+Sitemap: https://montesinaiengenharia.com.br/sitemap.xml
