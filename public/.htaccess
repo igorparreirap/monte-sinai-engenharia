@@ -1,6 +1,11 @@
 # Configuração para hospedagem Apache (HostGator).
 Options -Indexes
 
+# Bloqueia o acesso aos arquivos de controle do deploy (lista de arquivos e hashes).
+<FilesMatch "^\.ftp-deploy-.*\.json$">
+  Require all denied
+</FilesMatch>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   # Força HTTPS
