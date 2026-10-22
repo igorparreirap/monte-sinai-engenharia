@@ -85,12 +85,12 @@ O deploy é automático: quando o workflow **CI** passa na `main`, o workflow **
 
 Configuração no GitHub (Settings → Secrets and variables → Actions):
 
-| Tipo     | Nome           | Valor                          |
-| -------- | -------------- | ------------------------------ |
-| Variable | `FTP_SERVER`   | `br184.hostgator.com.br`       |
+| Tipo     | Nome           | Valor                                 |
+| -------- | -------------- | ------------------------------------- |
+| Variable | `FTP_SERVER`   | `br184.hostgator.com.br`              |
 | Variable | `SITE_URL`     | `https://montesinaiengenharia.com.br` |
-| Secret   | `FTP_USERNAME` | conta FTP dedicada ao deploy   |
-| Secret   | `FTP_PASSWORD` | senha dessa conta              |
+| Secret   | `FTP_USERNAME` | conta FTP dedicada ao deploy          |
+| Secret   | `FTP_PASSWORD` | senha dessa conta                     |
 
 O deploy também pode ser disparado manualmente em **Actions → Deploy → Run workflow**.
 
