@@ -88,7 +88,7 @@ Configuração no GitHub (Settings → Secrets and variables → Actions):
 | Tipo     | Nome           | Valor                          |
 | -------- | -------------- | ------------------------------ |
 | Variable | `FTP_SERVER`   | `br184.hostgator.com.br`       |
-| Variable | `SITE_URL`     | `https://montesinaieng.com.br` |
+| Variable | `SITE_URL`     | `https://montesinaiengenharia.com.br` |
 | Secret   | `FTP_USERNAME` | conta FTP dedicada ao deploy   |
 | Secret   | `FTP_PASSWORD` | senha dessa conta              |
 
