@@ -8,9 +8,11 @@ Options -Indexes
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Força HTTPS
-  RewriteCond %{HTTPS} off
-  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # Força HTTPS. Desativado até o certificado SSL (AutoSSL) ser emitido para o
+  # domínio; sem certificado, o redirecionamento leva à página 404 da hospedagem.
+  # Reativar removendo os "#" das duas linhas abaixo (issue #2).
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 <IfModule mod_headers.c>
