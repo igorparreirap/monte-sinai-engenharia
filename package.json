@@ -1,7 +1,7 @@
 {
   "name": "monte-sinai-engenharia",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Site institucional da Monte Sinai Engenharia e Construções LTDA",
   "type": "module",
   "engines": {
