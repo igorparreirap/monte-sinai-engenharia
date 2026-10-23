@@ -1,8 +1,30 @@
 # Monte Sinai Engenharia e Construções — Site institucional
 
+**🔗 [montesinaiengenharia.com.br](https://montesinaiengenharia.com.br)**
+
 Site institucional da **Monte Sinai Engenharia e Construções LTDA**, empresa de engenharia elétrica sediada em Itaberaí – GO desde 2013.
 
-Página única com apresentação da empresa, áreas de atuação, informações de contato, mapa e formulário que envia mensagens por e-mail via SMTP.
+Página única com apresentação da empresa, áreas de atuação, contatos por WhatsApp, mapa e formulário que envia mensagens por e-mail via SMTP.
+
+<p align="center">
+  <img src="docs/site-desktop.webp" alt="Página inicial do site no computador" width="72%" />
+  <img src="docs/site-mobile.webp" alt="Página inicial do site no celular" width="22%" />
+</p>
+
+## Lighthouse
+
+| Dispositivo | Performance | Acessibilidade | Boas práticas | SEO |
+| ----------- | :---------: | :------------: | :-----------: | :-: |
+| Celular     |     99      |       97       |      100      | 100 |
+| Computador  |     100     |       97       |      100      | 100 |
+
+<details>
+<summary>Ver relatórios</summary>
+
+<img src="docs/lighthouse-mobile.webp" alt="Relatório do Lighthouse no celular" width="48%" />
+<img src="docs/lighthouse-desktop.webp" alt="Relatório do Lighthouse no computador" width="48%" />
+
+</details>
 
 ## Stack
 
