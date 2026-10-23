@@ -1,130 +1,89 @@
-# Monte Sinai Engenharia e Construções — Site institucional
+# Monte Sinai Engenharia e Construções — Website
 
-**🔗 [montesinaiengenharia.com.br](https://montesinaiengenharia.com.br)**
+**🔗 [montesinaiengenharia.com.br](https://montesinaiengenharia.com.br)** · 🇧🇷 [Leia em português](README.pt-BR.md)
 
-Site institucional da **Monte Sinai Engenharia e Construções LTDA**, empresa de engenharia elétrica sediada em Itaberaí – GO desde 2013.
-
-Página única com apresentação da empresa, áreas de atuação, contatos por WhatsApp, mapa e formulário que envia mensagens por e-mail via SMTP.
+Corporate website for **Monte Sinai Engenharia e Construções**, an electrical engineering company based in Itaberaí, Goiás (Brazil), since 2013.
 
 <p align="center">
-  <img src="docs/site-desktop.webp" alt="Página inicial do site no computador" width="72%" />
-  <img src="docs/site-mobile.webp" alt="Página inicial do site no celular" width="22%" />
+  <img src="docs/site-desktop.webp" alt="Home page on desktop" width="72%" />
+  <img src="docs/site-mobile.webp" alt="Home page on mobile" width="22%" />
 </p>
+
+## Features
+
+- Responsive single-page layout: hero, about, services, contact and map
+- WhatsApp contacts with a pre-filled greeting message
+- Contact form that sends e-mails through authenticated SMTP, with server-side validation, honeypot and rate limiting
+- SEO: meta tags, Open Graph, schema.org structured data, `sitemap.xml` and `robots.txt`
+- Accessibility: semantic HTML, labelled fields, skip link, visible focus and `prefers-reduced-motion` support
+- Performance: WebP images with `srcset`, self-hosted fonts and a lean bundle
 
 ## Lighthouse
 
-| Dispositivo | Performance | Acessibilidade | Boas práticas | SEO |
-| ----------- | :---------: | :------------: | :-----------: | :-: |
-| Celular     |     99      |       97       |      100      | 100 |
-| Computador  |     100     |       97       |      100      | 100 |
+| Device  | Performance | Accessibility | Best Practices | SEO |
+| ------- | :---------: | :-----------: | :------------: | :-: |
+| Mobile  |     99      |      97       |      100       | 100 |
+| Desktop |     100     |      97       |      100       | 100 |
 
-<details>
-<summary>Ver relatórios</summary>
+## Tech stack
 
-<img src="docs/lighthouse-mobile.webp" alt="Relatório do Lighthouse no celular" width="48%" />
-<img src="docs/lighthouse-desktop.webp" alt="Relatório do Lighthouse no computador" width="48%" />
+| Layer        | Technologies                                                    |
+| ------------ | --------------------------------------------------------------- |
+| Front-end    | React 18, TypeScript (strict), Vite, Tailwind CSS, lucide-react |
+| Contact form | PHP 8 + PHPMailer                                               |
+| Quality      | ESLint (with jsx-a11y), Prettier, Vitest, Testing Library       |
+| CI/CD        | GitHub Actions                                                  |
 
-</details>
+## Getting started
 
-## Stack
-
-| Camada     | Tecnologias                                                     |
-| ---------- | --------------------------------------------------------------- |
-| Front-end  | React 18, TypeScript (strict), Vite, Tailwind CSS, lucide-react |
-| Formulário | Endpoint PHP 8 + PHPMailer (SMTP autenticado)                   |
-| Qualidade  | ESLint (incl. jsx-a11y), Prettier, Vitest + Testing Library     |
-| CI         | GitHub Actions                                                  |
-| Hospedagem | HostGator (Apache)                                              |
-
-## Destaques técnicos
-
-- **Dados centralizados** em `src/data/`: telefone, endereço, redes sociais e serviços são editados num único lugar.
-- **Acessibilidade:** HTML semântico, rótulos em todos os campos, link "pular para o conteúdo", foco visível e respeito a `prefers-reduced-motion`.
-- **Performance:** imagens em WebP com `srcset`, fontes auto-hospedadas (sem depender do Google Fonts) e bundle enxuto, sem bibliotecas de UI não utilizadas.
-- **SEO:** meta tags e Open Graph, dados estruturados `schema.org` (Electrician), `sitemap.xml` e `robots.txt`.
-- **Segurança do formulário:** validação no servidor, campo-armadilha contra robôs, limite de envios por IP e senha SMTP mantida fora do repositório e da pasta pública.
-
-## Estrutura
-
-```
-├─ public/                 # arquivos copiados como estão para o build
-│  ├─ api/enviar-contato.php
-│  ├─ .htaccess            # HTTPS, cache e cabeçalhos de segurança
-│  └─ robots.txt, sitemap.xml, ícones
-├─ private/
-│  └─ smtp-config.example.php   # modelo; o arquivo real fica só no servidor
-├─ src/
-│  ├─ assets/images/       # imagens otimizadas (WebP)
-│  ├─ components/          # seções da página
-│  ├─ data/                # dados institucionais e serviços
-│  └─ lib/                 # integração com o endpoint de contato
-└─ .github/workflows/ci.yml
-```
-
-## Rodando localmente
-
-Requisitos: Node.js 20+ (veja `.nvmrc`). Para testar o envio do formulário, também PHP 8.1+ e Composer.
+Requirements: Node.js 20+ (see `.nvmrc`).
 
 ```sh
 npm install
-npm run dev          # http://localhost:8080
+npm run dev   # http://localhost:8080
 ```
 
-Para testar o formulário de ponta a ponta, em outro terminal:
+To test the contact form locally you also need PHP 8.1+ and Composer:
 
 ```sh
 composer install
-cp private/smtp-config.example.php private/smtp-config.php   # e preencha a senha
-npm run dev:php      # servidor PHP em http://localhost:8000; o Vite redireciona /api para ele
+cp private/smtp-config.example.php private/smtp-config.php   # fill in the SMTP credentials
+npm run dev:php   # PHP server on :8000; Vite proxies /api to it
 ```
 
 ## Scripts
 
-| Comando           | Descrição                            |
-| ----------------- | ------------------------------------ |
-| `npm run dev`     | servidor de desenvolvimento          |
-| `npm run build`   | checagem de tipos + build em `dist/` |
-| `npm run preview` | serve o build localmente             |
-| `npm run lint`    | ESLint                               |
-| `npm run format`  | formata o código com Prettier        |
-| `npm test`        | testes com Vitest                    |
+| Command           | Description                     |
+| ----------------- | ------------------------------- |
+| `npm run dev`     | Start the development server    |
+| `npm run build`   | Type check and build to `dist/` |
+| `npm run preview` | Serve the production build      |
+| `npm run lint`    | Run ESLint                      |
+| `npm run format`  | Format the code with Prettier   |
+| `npm test`        | Run the test suite              |
 
-## Publicação (HostGator)
-
-O deploy é automático: quando o workflow **CI** passa na `main`, o workflow **Deploy** gera o build e envia por FTPS:
-
-| Local     | Servidor                      |
-| --------- | ----------------------------- |
-| `dist/`   | `public_html/` (raiz pública) |
-| `vendor/` | `vendor/` (fora da raiz)      |
+## Project structure
 
 ```
-/home1/monte968/
-├─ public_html/              ← build do site
-├─ vendor/                   ← PHPMailer
-└─ private/smtp-config.php   ← criado manualmente no servidor, nunca versionado
+├─ public/          # static files copied to the build (icons, robots.txt, .htaccess)
+│  └─ api/          # PHP endpoint for the contact form
+├─ private/         # SMTP config template (the real file is never committed)
+├─ src/
+│  ├─ assets/       # optimized images
+│  ├─ components/   # page sections
+│  ├─ data/         # company info and services, edited in one place
+│  └─ lib/          # contact form client
+└─ .github/         # CI and deploy workflows
 ```
 
-Configuração no GitHub (Settings → Secrets and variables → Actions):
+## Deployment
 
-| Tipo     | Nome           | Valor                                 |
-| -------- | -------------- | ------------------------------------- |
-| Variable | `FTP_SERVER`   | `br184.hostgator.com.br`              |
-| Variable | `SITE_URL`     | `https://montesinaiengenharia.com.br` |
-| Secret   | `FTP_USERNAME` | conta FTP dedicada ao deploy          |
-| Secret   | `FTP_PASSWORD` | senha dessa conta                     |
+Every pull request runs CI (format check, lint, type check, tests and build). When a change is merged into `main` and CI passes, a GitHub Actions workflow builds the site and deploys it over FTPS. Credentials are stored as GitHub Actions secrets, and the SMTP password lives only on the server, outside the public web root.
 
-O deploy também pode ser disparado manualmente em **Actions → Deploy → Run workflow**.
+## Workflow
 
-### Formulário de contato
+`main` is the stable branch. Changes go through pull requests from `feat/…`, `fix/…`, `docs/…` or `chore/…` branches, and commit messages follow [Conventional Commits](https://www.conventionalcommits.org/).
 
-O endpoint envia pelo SMTP da Locaweb, onde fica o e-mail da empresa, e lê as credenciais de `private/smtp-config.php` no servidor. Nesse arquivo ficam a conta de envio (`username`/`password`) e a lista de destinatários (`to`), mantendo endereços e senhas fora do repositório. Veja o modelo em `private/smtp-config.example.php`.
+## License
 
-## Fluxo de trabalho
-
-- `main` é a branch estável; mudanças entram por Pull Request a partir de branches `feat/…`, `fix/…`, `chore/…`.
-- Mensagens de commit seguem [Conventional Commits](https://www.conventionalcommits.org/pt-br/).
-
-## Direitos
-
-Código desenvolvido por [Igor Parreira](https://github.com/igorparreirap). Marca, logotipo, textos e fotografias pertencem à Monte Sinai Engenharia e Construções LTDA. Todos os direitos reservados.
+Code by [Igor Parreira](https://github.com/igorparreirap). The brand, logo, texts and photos belong to Monte Sinai Engenharia e Construções LTDA. All rights reserved.
