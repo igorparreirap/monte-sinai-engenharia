@@ -14,6 +14,7 @@ function whatsappLink(number: string) {
 
 export interface WhatsAppContact {
   name: string;
+  role?: string;
   display: string;
   href: string;
 }
@@ -24,9 +25,24 @@ export interface WhatsAppContact {
  */
 export const whatsappContacts: readonly WhatsAppContact[] = [
   { name: "Contato", display: "(62) 9 9637-3177", href: whatsappLink("5562996373177") },
-  { name: "Fabiano", display: "(62) 9 8429-3564", href: whatsappLink("5562984293564") },
-  { name: "Joel", display: "(62) 9 9698-0943", href: whatsappLink("5562996980943") },
-  { name: "Alberto", display: "(62) 9 8247-2147", href: whatsappLink("5562982472147") },
+  {
+    name: "Joel",
+    role: "Diretor",
+    display: "(62) 9 9698-0943",
+    href: whatsappLink("5562996980943"),
+  },
+  {
+    name: "Fabiano",
+    role: "Engenheiro eletricista",
+    display: "(62) 9 8429-3564",
+    href: whatsappLink("5562984293564"),
+  },
+  {
+    name: "Alberto",
+    role: "Consultor comercial",
+    display: "(62) 9 8247-2147",
+    href: whatsappLink("5562982472147"),
+  },
 ];
 
 export const company = {
@@ -40,7 +56,7 @@ export const company = {
   email: "contato@montesinaieng.com.br",
   whatsapp: whatsappContacts[0],
   address: {
-    street: "Praça da Matriz, Qd. 11, Lt. 20",
+    street: "Rua Jerônimo Pinheiro, Qd. 12, Lt. 6",
     city: "Itaberaí",
     state: "GO",
     zip: "76630-000",
