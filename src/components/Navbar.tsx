@@ -41,6 +41,9 @@ export function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noopener noreferrer" : undefined}
+                aria-label={item.external ? `${item.label} (PDF, abre em nova aba)` : undefined}
                 className="font-heading text-sm font-medium uppercase tracking-wide text-white/80 transition-colors hover:text-brand-orange"
               >
                 {item.label}
@@ -76,6 +79,9 @@ export function Navbar() {
               <li key={item.href}>
                 <a
                   href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  aria-label={item.external ? `${item.label} (PDF, abre em nova aba)` : undefined}
                   onClick={() => setOpen(false)}
                   className="block py-2 font-heading text-sm font-medium uppercase text-white/80 hover:text-brand-orange"
                 >

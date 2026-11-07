@@ -92,12 +92,22 @@ export const socialLinks: ReadonlyArray<{ network: SocialNetwork; label: string;
   { network: "whatsapp", label: "WhatsApp", href: company.whatsapp.href },
 ];
 
-export const navItems = [
+export interface NavItem {
+  label: string;
+  href: string;
+  /** Abre em nova aba (ex.: o PDF do portfólio). */
+  external?: boolean;
+}
+
+export const portfolioPdf = "/portfolio-monte-sinai.pdf";
+
+export const navItems: readonly NavItem[] = [
   { label: "Início", href: "#inicio" },
   { label: "Sobre", href: "#sobre" },
   { label: "Serviços", href: "#servicos" },
+  { label: "Portfólio", href: portfolioPdf, external: true },
   { label: "Contato", href: "#contato" },
-] as const;
+];
 
 export const stats = [
   { value: "+150", label: "Projetos concluídos" },
