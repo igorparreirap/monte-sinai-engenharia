@@ -61,20 +61,26 @@ export function Contact() {
               </InfoItem>
               <InfoItem icon={<WhatsAppIcon className="h-5 w-5" />} title="WhatsApp">
                 <ul className="space-y-1">
-                  {whatsappContacts.map((contact) => (
-                    <li key={contact.href}>
-                      <a
-                        href={contact.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`WhatsApp ${contact.name}: ${contact.display} (abre em nova aba)`}
-                        className={linkClass}
-                      >
-                        <span className="font-semibold text-white">{contact.name}</span>{" "}
-                        {contact.display}
-                      </a>
-                    </li>
-                  ))}
+                  {whatsappContacts.map((contact) => {
+                    const label = contact.role ? `${contact.name} (${contact.role})` : contact.name;
+                    return (
+                      <li key={contact.href}>
+                        <a
+                          href={contact.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`WhatsApp ${label}: ${contact.display} (abre em nova aba)`}
+                          className={linkClass}
+                        >
+                          <span className="font-semibold text-white">{contact.name}</span>
+                          {contact.role && (
+                            <span className="text-white/60"> · {contact.role}</span>
+                          )}{" "}
+                          <span className="whitespace-nowrap">{contact.display}</span>
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </InfoItem>
               <InfoItem icon={<Mail className="h-5 w-5" aria-hidden="true" />} title="E-mail">
