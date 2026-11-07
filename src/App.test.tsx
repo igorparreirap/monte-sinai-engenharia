@@ -38,17 +38,18 @@ describe("App", () => {
     ).toHaveAttribute("href", whatsappContacts[0].href);
   });
 
-  it("mostra o panorama entre os serviços e o contato", () => {
+  it("mostra o Portfólio entre Serviços e Contato no menu, abrindo o PDF", () => {
     render(<App />);
-    const panorama = screen.getByRole("img", { name: /Vista panorâmica/ });
-    const services = document.getElementById("servicos") as HTMLElement;
-    const contact = document.getElementById("contato") as HTMLElement;
-    expect(
-      services.compareDocumentPosition(panorama) & Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy();
-    expect(
-      panorama.compareDocumentPosition(contact) & Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy();
+    const nav = screen.getByRole("navigation", { name: "Principal" });
+    const labels = within(nav)
+      .getAllByRole("link")
+      .map((link) => link.textContent?.trim());
+    const servicos = labels.indexOf("Serviços");
+    expect(labels.slice(servicos, servicos + 3)).toEqual(["Serviços", "Portfólio", "Contato"]);
+    const portfolio = within(nav).getByRole("link", { name: /Portfólio/ });
+    expect(portfolio).toHaveAttribute("href", "/portfolio-monte-sinai.pdf");
+    expect(portfolio).toHaveAttribute("target", "_blank");
+    expect(screen.queryByRole("img", { name: /Vista panorâmica/ })).not.toBeInTheDocument();
   });
 
   it("mostra o e-mail da empresa com link clicável", () => {

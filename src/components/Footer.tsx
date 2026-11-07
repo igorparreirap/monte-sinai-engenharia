@@ -28,7 +28,13 @@ export function Footer() {
           <ul className="space-y-2 font-body text-sm text-white/70">
             {navItems.map((item) => (
               <li key={item.href}>
-                <a href={item.href} className="transition-colors hover:text-brand-orange">
+                <a
+                  href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  aria-label={item.external ? `${item.label} (PDF, abre em nova aba)` : undefined}
+                  className="transition-colors hover:text-brand-orange"
+                >
                   {item.label}
                 </a>
               </li>

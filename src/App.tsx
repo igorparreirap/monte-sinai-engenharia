@@ -4,7 +4,6 @@ import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { LocationMap } from "@/components/LocationMap";
 import { Navbar } from "@/components/Navbar";
-import { Panorama } from "@/components/Panorama";
 import { Services } from "@/components/Services";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
@@ -22,7 +21,6 @@ export default function App() {
         <Hero />
         <About />
         <Services />
-        <Panorama />
         <Contact />
         <LocationMap />
       </main>
